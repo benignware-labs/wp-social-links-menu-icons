@@ -33,6 +33,9 @@ function social_icons_nav_menu_link_attributes( $atts, $item, $args ) {
     } else {
       $item->title = "<i class=\"$icon_prefixed_name \"> </i>";
     }
+    if (!$atts['target']) {
+      $atts['target'] = '_blank';
+    }
   }
   return $atts;
 }
