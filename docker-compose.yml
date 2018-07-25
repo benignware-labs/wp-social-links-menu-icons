@@ -25,7 +25,7 @@ services:
     restart: always
     volumes:
     - wordpress:/var/www/html
-    - .:/var/www/html/wp-content/plugins/social-media-icons
+    - .:/var/www/html/wp-content/plugins/social-menu-icons
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
