@@ -1,8 +1,8 @@
 <?php
 
 /**
- Plugin Name: Social Menu Icons
- Plugin URI: https://github.com/benignware-labs/wp-social-menu-icons
+ Plugin Name: Social Links Menu Icons
+ Plugin URI: https://github.com/benignware-labs/wp-social-links-menu-icons
  Description: Show icons in social menu easily
  Version: 0.0.5
  Author: Rafael Nowrotek, Benignware
@@ -10,9 +10,7 @@
  License: MIT
 */
 
-add_filter( 'nav_menu_link_attributes', 'social_icons_nav_menu_link_attributes', 10, 3 );
-
-function social_icons_nav_menu_link_attributes( $atts, $item, $args ) {
+add_filter( 'nav_menu_link_attributes', function( $atts, $item, $args ) {
   $icon_type = isset($args->social_icon_type) ? $args->social_icon_type : "css";
   $icon_prefix = isset($args->social_icon_prefix) ? $args->social_icon_prefix : (($icon_type === 'svg') ? "icon-" : "genericon genericon-");
   $menu_name = is_string($args->menu) ? $args->menu : $args->menu->name;
@@ -38,5 +36,6 @@ function social_icons_nav_menu_link_attributes( $atts, $item, $args ) {
     }
   }
   return $atts;
-}
+}, 10, 3 );
+
 ?>

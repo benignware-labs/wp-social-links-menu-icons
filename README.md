@@ -1,5 +1,6 @@
-# Social Menu Icons Wordpress Plugin
-> Show icons in social menu easily
+# wp-social-links-menu-icons
+
+Show icons in social menu easily
 
 This plugin works by replacing link text in your social menu with corresponding css or svg icons. You can find a similar implementation in Wordpress' most recent theme [Twenty Seventeen](https://github.com/WordPress/twentyseventeen/blob/master/inc/icon-functions.php#L104).
 
