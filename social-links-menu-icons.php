@@ -4,18 +4,26 @@
  Plugin Name: Social Links Menu Icons
  Plugin URI: https://github.com/benignware-labs/wp-social-links-menu-icons
  Description: Show icons in social menu easily
- Version: 0.0.6
+ Version: 0.0.7
  Author: Rafael Nowrotek, Benignware
  Author URI: http://benignware.com
  License: MIT
 */
 
 add_filter( 'nav_menu_link_attributes', function( $atts, $item, $args ) {
-  $icon_type = isset($args->social_icon_type) ? $args->social_icon_type : "css";
-  $icon_prefix = isset($args->social_icon_prefix) ? $args->social_icon_prefix : (($icon_type === 'svg') ? "icon-" : "genericon genericon-");
+  $icon_type = isset($args->social_icon_type) ? $args->social_icon_type : 'css';
+
+  // `social_icon_prefix` is deprecated, use `social_icon_pattern` instead
+  if ($args->social_icon_prefix) {
+    $icon_pattern = $args->social_icon_prefix . '%s';
+  } else {
+    $icon_pattern = isset($args->social_icon_pattern) ? $args->social_icon_pattern : ($icon_type === 'svg' ? "icon-%s" : "genericon genericon-%s");
+  }
+
   $menu_name = is_string($args->menu) ? $args->menu : $args->menu->name;
   $is_social_menu = (strpos(trim(strtolower($menu_name)), 'social') !== false);
-  if ( $is_social_menu ) {
+
+  if ($is_social_menu) {
     $title = trim($item->title);
     $icon_name = strtolower(
       preg_replace(
@@ -24,17 +32,19 @@ add_filter( 'nav_menu_link_attributes', function( $atts, $item, $args ) {
         lcfirst($title)
       )
     );
-    $icon_prefixed_name = $icon_prefix . $icon_name;
+    $icon_class = sprintf($icon_pattern, $icon_name);
+
     $atts['title'] = $title;
     if ($icon_type === 'svg') {
-      $item->title = "<svg><use xlink:href=\"#$icon_prefixed_name\"/></svg>";
+      $item->title = "<svg><use xlink:href=\"#$icon_class\"/></svg>";
     } else {
-      $item->title = "<i class=\"$icon_prefixed_name \"> </i>";
+      $item->title = "<i class=\"$icon_class\"> </i>";
     }
     if (!$atts['target']) {
       $atts['target'] = '_blank';
     }
   }
+
   return $atts;
 }, 10, 3 );
 
