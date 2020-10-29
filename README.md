@@ -10,10 +10,21 @@ By default the plugin assumes genericons present on your assets and generates cs
 
 ```php
 function social_nav_menu_args($args) {
-  $args['social_icon_prefix'] = 'fa fa-';
+  $args['social_icon_pattern'] = 'fab fa-outline fa-lg fa-%1$s fa-%1$s-f';
+
   return $args;
 }
-add_filter( 'wp_nav_menu_args', 'social_nav_menu_args', 1, 2 );
+add_filter( 'wp_nav_menu_args', 'social_nav_menu_args', 1, 1 );
+```
+
+### Customize icon class name
+
+You may customize the generated css class by adding to `social_links_menu-icons.php` filter:
+
+```php
+add_filter( 'social_links_menu_icons_name', function($name) {
+	return preg_replace('~linked-in~', 'linkedin', $name);
+}, 1, 1 );
 ```
 
 ## Development
@@ -28,9 +39,13 @@ Point terminal to your project root and start up the container.
 docker-compose up -d
 ```
 
-Open your browser at [http://localhost:8000](http://localhost:8000).
+Setup wordpress
 
-Go through Wordpress installation and activate Swiper Shortcode wordpress plugin.
+```shell
+docker-compose run --rm wp wp-install
+```
+
+Open your browser at [http://localhost:8030](http://localhost:8030).
 
 ### Useful docker commands
 

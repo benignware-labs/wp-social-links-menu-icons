@@ -1,0 +1,21 @@
+/*
+Theme Name: Social Links Menu Icons
+Description: Demo theme for social links menu icons wordpress plugin
+Author: Rafael Nowrotek
+Author URI: http://benignware.com
+Template: twentyfifteen
+Version: 1.0
+Tags:
+*/
+
+.social-navigation .menu-item a:before {
+  display: none;
+}
+
+.social-navigation .menu-item .screen-reader-text {
+  clip: initial;
+  width: initial;
+  height: initial;
+  overflow: initial;
+  position: initial;
+}
