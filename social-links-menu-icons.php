@@ -4,7 +4,7 @@
  Plugin Name: Social Links Menu Icons
  Plugin URI: https://github.com/benignware-labs/wp-social-links-menu-icons
  Description: Show icons in social menu easily
- Version: 0.0.8
+ Version: 0.0.9
  Author: Rafael Nowrotek, Benignware
  Author URI: http://benignware.com
  License: MIT
